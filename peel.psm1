@@ -29,6 +29,91 @@ if ($env:PEEL_SHELL) {
 }
 # --- end transcript logic ---
 
+# --- PEEL transparent external command capture ---
+if ($env:PEEL_SHELL) {
+    if (-not (Test-Path function:\OriginalPrompt)) {
+        function OriginalPrompt { & $function:prompt }
+        Set-Alias -Name peel_original_prompt -Value OriginalPrompt -Scope Global
+    }
+    function prompt {
+        $line = Read-Host -Prompt (peel_original_prompt)
+        if ([string]::IsNullOrWhiteSpace($line)) { return (peel_original_prompt) }
+        $parsed = $null
+        try {
+            $parsed = [System.Management.Automation.PSParser]::Tokenize($line, [ref]$null)
+        } catch {}
+        $firstToken = $parsed | Where-Object { $_.Type -eq 'Command' } | Select-Object -First 1
+        $cmd = $firstToken.Content
+        $isInternal = Get-Command $cmd -ErrorAction SilentlyContinue
+        if ($isInternal -and $isInternal.CommandType -ne 'Application') {
+            # PowerShell cmdlet/function/alias: invoke normally
+            Invoke-Expression $line
+        } else {
+            # External command: capture output
+            $args = $line.Substring($cmd.Length).Trim()
+            if ($args) {
+                Invoke-PEELCommand -Command $cmd -Arguments $args.Split(' ')
+            } else {
+                Invoke-PEELCommand -Command $cmd
+            }
+        }
+        return (peel_original_prompt)
+    }
+}
+# --- end PEEL transparent external command capture ---
+
+function Invoke-PEELCommand {
+    <#
+        .SYNOPSIS
+        Runs an external command, capturing both stdout and stderr to the PEEL transcript and displaying output in real time.
+        .DESCRIPTION
+        Use this function to run external programs (e.g., python, node, etc.) so their output is included in the PEEL transcript for LLM assistance.
+        .PARAMETER Command
+        The command to run (as a string or array).
+        .PARAMETER Arguments
+        Arguments to pass to the command (optional).
+    #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true, Position=0)]
+        [string]$Command,
+        [Parameter(Position=1)]
+        [string[]]$Arguments
+    )
+    if (-not $global:PEELTranscriptPath) {
+        Write-Error "PEEL transcript not active. Only use Invoke-PEELCommand in a PEEL shell."
+        return
+    }
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = $Command
+    if ($Arguments) {
+        $psi.Arguments = [string]::Join(' ', $Arguments)
+    }
+    $psi.RedirectStandardOutput = $true
+    $psi.RedirectStandardError = $true
+    $psi.UseShellExecute = $false
+    $psi.CreateNoWindow = $true
+    $process = New-Object System.Diagnostics.Process
+    $process.StartInfo = $psi
+    $null = $process.Start()
+    $stdout = $process.StandardOutput
+    $stderr = $process.StandardError
+    while (-not $stdout.EndOfStream -or -not $stderr.EndOfStream) {
+        if (-not $stdout.EndOfStream) {
+            $line = $stdout.ReadLine()
+            Write-Host $line
+            Add-Content -Path $global:PEELTranscriptPath -Value $line
+        }
+        if (-not $stderr.EndOfStream) {
+            $errLine = $stderr.ReadLine()
+            Write-Host $errLine -ForegroundColor Red
+            Add-Content -Path $global:PEELTranscriptPath -Value $errLine
+        }
+    }
+    $process.WaitForExit()
+    return $process.ExitCode
+}
+
 function Install-Lemonade {
     <#
         .SYNOPSIS
@@ -180,7 +265,7 @@ function Invoke-AidCore {
         $scrollbackRaw = Get-Content $transcriptPath -Raw
         $scrollback = $scrollbackRaw
         # Optionally trim to last N lines/characters if needed
-        $maxChars = 8000
+        $maxChars = 4000
         if ($scrollback.Length -gt $maxChars) {
             $scrollback = $scrollback.Substring($scrollback.Length - $maxChars)
         }
