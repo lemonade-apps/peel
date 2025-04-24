@@ -1,10 +1,20 @@
-# PEEL: PowerShell Enhanced by Embedded Lemonade (LLM) Functionality
+# PEEL: PowerShell Enhanced by Embedded Lemonade
+
+<div align="center">
+  <img src="https://private-user-images.githubusercontent.com/80718789/437064377-5d8c0506-9159-4af3-a36a-ffa1078a3e1f.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDU1MDQ1MjIsIm5iZiI6MTc0NTUwNDIyMiwicGF0aCI6Ii84MDcxODc4OS80MzcwNjQzNzctNWQ4YzA1MDYtOTE1OS00YWYzLWEzNmEtZmZhMTA3OGEzZTFmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MjQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDI0VDE0MTcwMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQ1OGQyNjZmNmEzN2Q0MDZhNDgxZDY1MDljZjk1ZWQwMDAyMDAxNWZmNTc5YjlhODk5NzRjMjlhMGNhODVhNDUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.GbfOlKmvJTbGPAWfBnGg98aM-1EqC4XsylC4xwmCmyo" width="25%" />
+</div>
 
 ## Overview
 
 🍋 PEEL is a PowerShell module that extends the capabilities of PowerShell by integrating with [Lemonade Server](https://github.com/onnx/turnkeyml). It offers seamless access to LLM-powered assistance directly within the terminal, providing contextual help based on the terminal's scrollback.
 
-PEEL currently requires a Ryzen AI 300-series PC running Windows 11. 
+Once you're set up, simply run `Get-Aid` to get help from your local LLM right inside your PowerShell session!
+
+<div align="center">
+  <img src="https://private-user-images.githubusercontent.com/80718789/437064133-ec0c27a7-34b2-44f6-a91b-24c5ffedca6f.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDU1MDQ1MjIsIm5iZiI6MTc0NTUwNDIyMiwicGF0aCI6Ii84MDcxODc4OS80MzcwNjQxMzMtZWMwYzI3YTctMzRiMi00NGY2LWE5MWItMjRjNWZmZWRjYTZmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MjQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDI0VDE0MTcwMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTBhMzUzMjk5Y2MzZTJhNWM5YjYyYmZhZmE5NGZlMTkxYTExYTU0YTllZDgwNDU1YjBjZWE1NjY3MjkwMTI0NTkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.vq0yf2DDeTzksV2fyLZYMNYnk1RwpmhKnAbUwnyZIz4" width="75%" />
+</div>
+
+>PEEL currently requires a Ryzen AI 300-series PC running Windows 11.
 
 ## Key Features
 
@@ -127,6 +137,8 @@ If you meant to use a different command, please let me know and I'll do my best 
 ## Portions Licensed as Follows
 
 \> This project was inspired by [`wut-cli`](https://github.com/shobrook/wut) its system prompt is based on the `wut` `EXPLAIN_PROMPT` system prompt.
+
+\> PEEL uses the [Microsoft lemon emoji](https://github.com/microsoft/fluentui-emoji) as an icon.
 
 MIT License
 
