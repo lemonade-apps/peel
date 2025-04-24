@@ -86,7 +86,7 @@ try {
                     icon = $faviconPath
                     startingDirectory = "~"
                     hidden = $false
-                    guid = "{b1b1b1b1-1111-1111-1111-111111111111}"
+                    guid = [guid]::NewGuid().ToString()
                 }
                 $settings.profiles.list += $peelProfileObj
             }

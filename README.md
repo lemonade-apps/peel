@@ -85,15 +85,14 @@ You can use PEEL shell as a custom terminal profile in Visual Studio Code as wel
 **Implementation Details:**
 
 *   **Language:** PowerShell
-*   **Location:** New `peel` directory under `examples/lemonade/server/`.
+*   **Location:** Root of the `peel` repository.
 *   **File Structure**
 ```
-examples/lemonade/server/
-    └── peel/
-        ├── peel.psd1 # Module manifest
-        ├── peel.psm1 # PowerShell module implementation
-        ├── install.ps1 # Installation script
-        ├── favicon.ico # Icon for Windows Terminal
+peel/
+├── peel.psd1         # Module manifest
+├── peel.psm1         # PowerShell module implementation
+├── install.ps1       # Installation script
+├── favicon.ico       # Icon for Windows Terminal
 ```
 
 ## Usage Example
