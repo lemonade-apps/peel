@@ -31,7 +31,8 @@ Helper cmdlet:
 ## Installation
  * Clone this repository.
  * In PowerShell, run `install.ps1` from the same directory as this document.
- * The new PEEL shell, and its cmdlets, are now available in Windows Terminal.
+   * After installation complete, the new PEEL shell, and its cmdlets, are now available in Windows Terminal.
+ * Open the PEEL shell in Windows Terminal
  * Run the `Install-Lemonade` cmdlet to get Lemonade Server, if you don't have it already.
 
 **Implementation Details:**
