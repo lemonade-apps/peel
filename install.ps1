@@ -53,50 +53,47 @@ try {
     $installResult = Install-PEELModule -moduleRoot $moduleRoot
 
     $importSuccess = $true
-    try {
-        $oldVerbose = $VerbosePreference
-        $VerbosePreference = "SilentlyContinue"
-        Import-Module peel -Force -ErrorAction Stop
-        $VerbosePreference = $oldVerbose
-        # Get exported cmdlets from the module
-        $cmdlets = (Get-Command -Module peel | Where-Object { $_.CommandType -eq 'Function' } | Select-Object -ExpandProperty Name)
-    } catch {
-        Write-Error "Failed to import peel.psm1: $($_.Exception.Message)"
-        $importSuccess = $false
-    }
-
-    # Register PEEL shell in Windows Terminal (if not already present)
+    $wtProfileSuccess = $true
     try {
         $wtSettingsPath = Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
         if (Test-Path $wtSettingsPath) {
             $settings = Get-Content $wtSettingsPath -Raw | ConvertFrom-Json
-            $peelProfile = $settings.profiles.list | Where-Object { $_.name -eq "PEEL" }
             $pwshPath = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
             $peelCommand = "$pwshPath -NoExit -Command & { `$env:PEEL_SHELL='1'; Import-Module peel }"
-            if ($peelProfile) {
-                $peelProfile.commandline = $peelCommand
-                $peelProfile.icon = $faviconPath
-                if ($peelProfile.PSObject.Properties["env"]) {
-                    $peelProfile.PSObject.Properties.Remove("env")
-                }
-            } else {
-                $peelProfileObj = [PSCustomObject]@{
-                    name = "PEEL"
-                    commandline = $peelCommand
-                    icon = $faviconPath
-                    startingDirectory = "~"
-                    hidden = $false
-                    guid = [guid]::NewGuid().ToString()
-                }
-                $settings.profiles.list += $peelProfileObj
+            $faviconPath = Join-Path $moduleRoot "favicon.ico"
+            # Remove any existing PEEL profile(s)
+            if ($settings.profiles.list -is [System.Collections.IEnumerable]) {
+                $settings.profiles.list = @($settings.profiles.list | Where-Object { $_.name -ne "PEEL" })
             }
-            $settings | ConvertTo-Json -Depth 100 | Set-Content $wtSettingsPath -Encoding UTF8
+            $peelProfileObj = [PSCustomObject]@{
+                name = "PEEL"
+                commandline = $peelCommand
+                icon = $faviconPath
+                startingDirectory = "~"
+                hidden = $false
+                guid = "{" + ([guid]::NewGuid().ToString()) + "}"
+            }
+            # Ensure profiles.list is an array
+            if ($settings.profiles.list -isnot [System.Collections.IList]) {
+                $settings.profiles.list = @($settings.profiles.list)
+            }
+            $settings.profiles.list += $peelProfileObj
+            # Validate JSON before writing
+            $json = $settings | ConvertTo-Json -Depth 100
+            try {
+                $null = $json | ConvertFrom-Json
+                $json | Set-Content $wtSettingsPath -Encoding UTF8
+            } catch {
+                Write-Error "Refusing to write invalid settings.json for Windows Terminal. Aborting installation."
+                $wtProfileSuccess = $false
+            }
         }
     } catch {
-        Write-Warning "Could not register PEEL shell in Windows Terminal: $($_.Exception.Message)"
+        Write-Error "Could not register PEEL shell in Windows Terminal: $($_.Exception.Message)"
+        $wtProfileSuccess = $false
     }
 
-    if ($importSuccess -and $installResult -eq $true) {
+    if ($importSuccess -and $installResult -eq $true -and $wtProfileSuccess) {
         Write-Host "==============================="
         Write-Host " PEEL Module Installation"
         Write-Host "==============================="
@@ -111,7 +108,7 @@ try {
         Write-Host "==============================="
         exit 0
     } else {
-        Write-Error "An error occurred while installing or importing the PEEL Module."
+        Write-Error "An error occurred while installing or importing the PEEL Module, or updating Windows Terminal profile."
         exit 1
     }
 } catch {
