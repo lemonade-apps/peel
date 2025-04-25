@@ -48,6 +48,25 @@ The recommended way to use PEEL is via the **PEEL shell profile in Windows Termi
   - Ensures transcript-based context is available for LLM commands.
   - Prevents accidental use in non-PEEL shells, which would not capture the full scrollback.
 
+## Installation
+ * Clone this repository.
+ * In PowerShell, run `install.ps1` from the same directory as this document.
+ * The new PEEL shell, and its cmdlets, are now available in Windows Terminal.
+ * Run the `Install-Lemonade` cmdlet to get Lemonade Server, if you don't have it already.
+
+**Implementation Details:**
+
+*   **Language:** PowerShell
+*   **Location:** Root of the `peel` repository.
+*   **File Structure**
+```
+peel/
+├── peel.psd1         # Module manifest
+├── peel.psm1         # PowerShell module implementation
+├── install.ps1       # Installation script
+├── favicon.ico       # Icon for Windows Terminal
+```
+
 ## Using PEEL Shell in VS Code
 
 You can use PEEL shell as a custom terminal profile in Visual Studio Code as well as Windows Terminal.
@@ -75,25 +94,6 @@ You can use PEEL shell as a custom terminal profile in Visual Studio Code as wel
 4. Save the file. Now, you can open a PEEL shell from the VS Code terminal dropdown.
 
 > **Note:** Make sure the PEEL PowerShell module is installed and accessible to the PowerShell instance launched by VS Code.
-
-## Installation
- * Clone this repository.
- * In PowerShell, run `install.ps1` from the same directory as this document.
- * The new PEEL shell, and its cmdlets, are now available in Windows Terminal.
- * Run the `Install-Lemonade` cmdlet to get Lemonade Server, if you don't have it already.
-
-**Implementation Details:**
-
-*   **Language:** PowerShell
-*   **Location:** Root of the `peel` repository.
-*   **File Structure**
-```
-peel/
-├── peel.psd1         # Module manifest
-├── peel.psm1         # PowerShell module implementation
-├── install.ps1       # Installation script
-├── favicon.ico       # Icon for Windows Terminal
-```
 
 ## Usage Example
 
