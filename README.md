@@ -59,15 +59,21 @@ The recommended way to use PEEL is via the **PEEL shell profile in Windows Termi
 
 - **Environment Variable:**
   - The PEEL shell sets the `PEEL_SHELL` environment variable automatically.
-  - If you want to use PEEL features in any PowerShell session (not just the Windows Terminal PEEL profile), you can manually set the `PEEL_SHELL` environment variable in your user or system environment variables, or in your PowerShell profile script:
-    ```powershell
-    $env:PEEL_SHELL = '1'
-    Import-Module peel
-    ```
 
 - **Why use the PEEL shell?**
   - Ensures transcript-based context is available for LLM commands.
   - Prevents accidental use in non-PEEL shells, which would not capture the full scrollback.
+
+### Using PEEL in Any PowerShell Session
+
+If you want to use PEEL features in any PowerShell session (not just the Windows Terminal PEEL profile), you can manually set the `PEEL_SHELL` environment variable in your user or system environment variables, or in your PowerShell profile script:
+
+```powershell
+$env:PEEL_SHELL = '1'
+Import-Module peel
+```
+
+This enables PEEL's transcript-based context and cmdlets in any PowerShell window.
 
 ### Using PEEL Shell in VS Code
 
