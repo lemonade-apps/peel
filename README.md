@@ -1,7 +1,7 @@
 # PEEL: PowerShell Enhanced by Embedded Lemonade
 
 <div align="center">
-  <img src="https://private-user-images.githubusercontent.com/80718789/439958542-e426d0a3-4d51-4bf9-b3af-bba360813df4.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDYxOTgwODYsIm5iZiI6MTc0NjE5Nzc4NiwicGF0aCI6Ii84MDcxODc4OS80Mzk5NTg1NDItZTQyNmQwYTMtNGQ1MS00YmY5LWIzYWYtYmJhMzYwODEzZGY0LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA1MDIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNTAyVDE0NTYyNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTY2OWMwZjMzNTBhZjdjN2JkY2E0NDE2MTk0MzkyNjg5OGVjOTgyYTdiNjMzMGRjZmU2NWNlMjM2OGI2MzJkZTMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.Kfs8S-L6V9VTHzwrGieOgGcRhu48iFM_vZCXNYcIKNU" width="25%" />
+  <img src="https://github.com/lemonade-apps/.github/blob/main/img/peel_logo.png" width="25%" />
 </div>
 
 ## Overview
@@ -11,7 +11,7 @@
 Once you're set up, simply run `Get-Aid` to get help from your local LLM right inside your PowerShell session!
 
 <div align="center">
-  <img src="https://private-user-images.githubusercontent.com/80718789/439958585-7e20775e-b88f-4a6a-a7af-ec2e09ffb793.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDYxOTgwODYsIm5iZiI6MTc0NjE5Nzc4NiwicGF0aCI6Ii84MDcxODc4OS80Mzk5NTg1ODUtN2UyMDc3NWUtYjg4Zi00YTZhLWE3YWYtZWMyZTA5ZmZiNzkzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA1MDIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNTAyVDE0NTYyNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTA2NWVlMzhmNWJkMmZlNzAyNTBhYTRiYzc0YzIzZjVmYWNlNWZiYWQxZjdkYmIwZDQwNGIzNzhkMzY4OGMyY2QmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.25oKYKeD928MWV1stlgO88IGc8A2FcgwGrjABbuzPIY" width="75%" />
+  <img src="https://github.com/lemonade-apps/.github/blob/main/img/peel_screenshot.png" width="75%" />
 </div>
 
 >PEEL currently requires a Ryzen AI 300-series PC running Windows 11.
